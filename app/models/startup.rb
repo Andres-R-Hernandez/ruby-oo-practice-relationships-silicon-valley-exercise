@@ -26,7 +26,7 @@ class Startup
   end
 
   def self.domains
-    self.all.map{|startups|startups.domain}
+    self.all.map{|startups|startups.domain}.uniq
   end
 
   def sign_contract(venture_capitalist, type, investment)
@@ -46,19 +46,21 @@ class Startup
   end
 
   def investors
-    find_funding.map{|FR|FR.venture_capitalist}.uniq
+    find_funding.map{|fr|fr.venture_capitalist}.uniq
+    
   end
 
   def big_investors
     big_investors = []
-    startup_vcs = find_funding.map{|FR|FR.venture_capitalist}
+    startup_vcs = find_funding.map{|fr|fr.venture_capitalist}
     tc_vcs = VentureCapitalist.tres_commas_club
     startup_vcs.each do |startup_vcs|
       tc_vcs.each do |tc_vcs|
         if startup_vcs==tc_vcs
           big_investors << tc_vcs
+        end
       end
-    end
+    end 
     big_investors.uniq
   end
 
