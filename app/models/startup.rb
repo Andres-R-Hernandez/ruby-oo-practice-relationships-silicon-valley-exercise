@@ -47,7 +47,7 @@ class Startup
 
   def investors
     find_funding.map{|fr|fr.venture_capitalist}.uniq
-    
+
   end
 
   def big_investors
@@ -60,7 +60,7 @@ class Startup
           big_investors << tc_vcs
         end
       end
-    end 
+    end
     big_investors.uniq
   end
 
